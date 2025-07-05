@@ -2,17 +2,20 @@
 chrome.runtime.onInstalled.addListener(() => {
   console.log('FilmAffinity Search Extension instalada');
   
-  // Crear el menú contextual
-  chrome.contextMenus.create({
-    id: "filmaffinity-search",
-    title: "FilmAffinity Search",
-    contexts: ["selection", "page", "all"]
-  }, () => {
-    if (chrome.runtime.lastError) {
-      console.error('Error creando menú contextual:', chrome.runtime.lastError);
-    } else {
-      console.log('Menú contextual creado exitosamente');
-    }
+  // Limpiar menús existentes primero
+  chrome.contextMenus.removeAll(() => {
+    // Crear el menú contextual
+    chrome.contextMenus.create({
+      id: "filmaffinity-search",
+      title: "FilmAffinity Search",
+      contexts: ["all"]
+    }, () => {
+      if (chrome.runtime.lastError) {
+        console.error('Error creando menú contextual:', chrome.runtime.lastError);
+      } else {
+        console.log('Menú contextual "FilmAffinity Search" creado exitosamente');
+      }
+    });
   });
 });
 
@@ -45,15 +48,12 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.tabs.create({
       url: filmAffinitySearchUrl,
       active: true
-    }, (newTab) => {
-      if (chrome.runtime.lastError) {
-        console.error('Error creando pestaña:', chrome.runtime.lastError);
-      } else {
-        console.log('Pestaña creada exitosamente:', newTab.id);
-      }
+    }).then((newTab) => {
+      console.log('Pestaña creada exitosamente:', newTab.id);
+      console.log('Búsqueda desde menú contextual:', searchQuery);
+    }).catch((error) => {
+      console.error('Error creando pestaña:', error);
     });
-    
-    console.log('Búsqueda desde menú contextual:', searchQuery);
   }
 });
 
