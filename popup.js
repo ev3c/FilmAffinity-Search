@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
       searchInput.value = selectedText;
     }
     // Si no hay texto seleccionado, mantiene "The Fisher King" del HTML
+    
+    // Seleccionar todo el texto en el campo de búsqueda para facilitar la edición
+    searchInput.select();
+    searchInput.focus();
   });
   
   searchButton.addEventListener('click', function() {

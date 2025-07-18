@@ -4,16 +4,29 @@ chrome.runtime.onInstalled.addListener(() => {
   
   // Limpiar menús existentes primero
   chrome.contextMenus.removeAll(() => {
-    // Crear el menú contextual
+    // Crear el menú contextual para cuando hay texto seleccionado
     chrome.contextMenus.create({
-      id: "filmaffinity-search",
-      title: "FilmAffinity Search",
-      contexts: ["all"]
+      id: "filmaffinity-search-selection",
+      title: "FilmAffinity Search : %s",
+      contexts: ["selection"]
     }, () => {
       if (chrome.runtime.lastError) {
-        console.error('Error creando menú contextual:', chrome.runtime.lastError);
+        console.error('Error creando menú contextual para selección:', chrome.runtime.lastError);
       } else {
-        console.log('Menú contextual "FilmAffinity Search" creado exitosamente');
+        console.log('Menú contextual para selección creado exitosamente');
+      }
+    });
+    
+    // Crear el menú contextual para cuando no hay texto seleccionado
+    chrome.contextMenus.create({
+      id: "filmaffinity-search-default",
+      title: "FilmAffinity Search : The Fisher King",
+      contexts: ["page", "link", "image"]
+    }, () => {
+      if (chrome.runtime.lastError) {
+        console.error('Error creando menú contextual por defecto:', chrome.runtime.lastError);
+      } else {
+        console.log('Menú contextual por defecto creado exitosamente');
       }
     });
   });
@@ -28,7 +41,7 @@ chrome.action.onClicked.addListener((tab) => {
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   console.log('Menú contextual clickeado:', info.menuItemId);
   
-  if (info.menuItemId === "filmaffinity-search") {
+  if (info.menuItemId === "filmaffinity-search-selection" || info.menuItemId === "filmaffinity-search-default") {
     let searchQuery = "";
     
     // Si hay texto seleccionado, usarlo

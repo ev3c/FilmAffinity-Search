@@ -1,15 +1,15 @@
 body {
   width: 320px;
-  padding: 30px 15px 15px 15px;
+  padding: 10px 15px 8px 15px;
   font-family: Arial, sans-serif;
   background-color: #447CAD;
 }
 
 h1 {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   text-align: left;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -17,8 +17,8 @@ h1 {
 }
 
 .title-icon {
-  width: 150px;
-  height: 32px;
+  width: 170px;
+  height: 30px;
 }
 
 .search-container {
@@ -29,10 +29,10 @@ h1 {
 
 #searchInput {
   flex: 1;
-  padding: 10px;
+  padding: 4px 8px;
   border: 2px solid #ddd;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 13px;
   outline: none;
 }
 
@@ -44,14 +44,14 @@ button {
   background-color: #ADD8E6;
   color: #333;
   border: none;
-  padding: 10px 12px;
+  padding: 4px 10px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   transition: background-color 0.3s;
   white-space: nowrap;
-  min-width: 40px;
+  min-width: 36px;
 }
 
 button:hover {
