@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   const searchButton = document.getElementById('searchButton');
   const searchInput = document.getElementById('searchInput');
+  const shareIcon = document.querySelector('.share-icon');
   
   // Función para obtener el texto seleccionado de la pestaña activa
   async function getSelectedText() {
@@ -69,5 +70,26 @@ document.addEventListener('DOMContentLoaded', function() {
     if (event.key === 'Enter') {
       searchButton.click();
     }
+  });
+  
+  // Función para compartir la extensión por Gmail
+  shareIcon.addEventListener('click', function() {
+    const subject = 'FilmAffinity Search Extension';
+    const body = `Te paso una extensión de Chrome/Edge que uso siempre: FilmAffinity Search Extension.
+Sirve para buscar pelis, actores, directores, etc. en FilmAffinity al instante desde el navegador. 
+¡Muy útil! 🍿✨
+
+Just sharing a Chrome/Edge extension I love: FilmAffinity Search Extension.
+It lets you search movies, actors, directors, etc. in FilmAffinity right from your browser. 
+Super useful! 🎥💻
+
+@https://chromewebstore.google.com/detail/afckaolgijpbnomcfpgedfgkibclaehb?utm_source=item-share-cb`;
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    chrome.tabs.create({
+      url: gmailUrl,
+      active: true
+    });
   });
 }); 
