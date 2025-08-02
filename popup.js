@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const searchButton = document.getElementById('searchButton');
   const searchInput = document.getElementById('searchInput');
   const shareIcon = document.querySelector('.share-icon');
+  const rateIcon = document.querySelector('.rate-icon');
   
   // Función para obtener el texto seleccionado de la pestaña activa
   async function getSelectedText() {
@@ -89,6 +90,16 @@ Super useful! 🎥💻
     
     chrome.tabs.create({
       url: gmailUrl,
+      active: true
+    });
+  });
+  
+  // Función para abrir la página de la extensión en Chrome Web Store para puntuar
+  rateIcon.addEventListener('click', function() {
+    const chromeStoreUrl = 'https://chromewebstore.google.com/detail/afckaolgijpbnomcfpgedfgkibclaehb?utm_source=item-share-cb';
+    
+    chrome.tabs.create({
+      url: chromeStoreUrl,
       active: true
     });
   });
